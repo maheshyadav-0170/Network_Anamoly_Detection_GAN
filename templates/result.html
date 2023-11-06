@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}
+<div class="mt-4">
+  <h1>Anomaly Detection Results</h1>
+  <div class="row mt-4">
+    <div class="col">
+      <p>Total number of test data: {{ total_test_data }}</p>
+      <p>Number of detected anomalies: {{ num_detected_anomalies }}</p>
+      <p>Number of non-anomalies (Normal data): {{ num_non_anomalies }}</p>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <h2>Detected Anomalies:</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Source IP</th>
+            <th scope="col">Destination IP</th>
+            <th scope="col">Source Port</th>
+            <th scope="col">Destination Port</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for anomaly in detected_anomalies %}
+          <tr class="table-danger">
+            <td>{{ anomaly.src_ip }}</td>
+            <td>{{ anomaly.dst_ip }}</td>
+            <td>{{ anomaly.src_port }}</td>
+            <td>{{ anomaly.dst_port }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <h2>Non-Anomalies (Normal Data):</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Source IP</th>
+            <th scope="col">Destination IP</th>
+            <th scope="col">Source Port</th>
+            <th scope="col">Destination Port</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for non_anomaly in non_anomalies %}
+          <tr class="table-success">
+            <td>{{ non_anomaly.src_ip }}</td>
+            <td>{{ non_anomaly.dst_ip }}</td>
+            <td>{{ non_anomaly.src_port }}</td>
+            <td>{{ non_anomaly.dst_port }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
